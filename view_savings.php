@@ -2,7 +2,7 @@
 session_start();
 include "db.php";
 
-// Check if user is logged in
+
 if (!isset($_SESSION["user_id"])) {
     header("Location: login.html");
     exit();
@@ -10,12 +10,12 @@ if (!isset($_SESSION["user_id"])) {
 
 $user_id = $_SESSION["user_id"];
 
-// Unlock savings plans where the deadline has passed
+// for unlocking savings plan(future remiander work on it soon)
 $current_date = date('Y-m-d');
 $stmt = $pdo->prepare("UPDATE savings_plans SET status = 'active' WHERE user_id = ? AND status = 'locked' AND deadline < ?");
 $stmt->execute([$user_id, $current_date]);
 
-// Handle delete or lock action
+
 if (isset($_GET['action']) && isset($_GET['plan_id'])) {
     $plan_id = $_GET['plan_id'];
 
@@ -31,7 +31,7 @@ if (isset($_GET['action']) && isset($_GET['plan_id'])) {
     exit();
 }
 
-// Fetch all valid savings plans
+
 $stmt = $pdo->prepare("SELECT * FROM savings_plans WHERE user_id = ? AND (status = 'active' OR status = 'locked')");
 $stmt->execute([$user_id]);
 $plans = $stmt->fetchAll();
@@ -95,7 +95,7 @@ $plans = $stmt->fetchAll();
                             <?php echo ucfirst($plan['status']); ?>
                         </span><br>
 
-                        <!-- Actions -->
+                        
                         <?php if ($plan['status'] !== 'locked'): ?>
                             <a href="view_savings.php?action=lock&plan_id=<?php echo $plan['id']; ?>">Lock</a> |
                         <?php endif; ?>

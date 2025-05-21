@@ -14,30 +14,30 @@ if (!isset($_SESSION["user_id"])) {
 
 $user_id = $_SESSION["user_id"];
 
-// Handle form submission
+
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    // Get user input from form with validation
+    
     $title = isset($_POST["title"]) ? $_POST["title"] : '';
     $category = isset($_POST["category"]) ? $_POST["category"] : '';
     $target_amount = isset($_POST["target_amount"]) ? $_POST["target_amount"] : '';
     $description = isset($_POST["description"]) ? $_POST["description"] : '';
-    $deadline = isset($_POST["deadline"]) ? $_POST["deadline"] : '';  // Add deadline input
+    $deadline = isset($_POST["deadline"]) ? $_POST["deadline"] : '';  
 
-    // Insert new savings plan into the database
+    
     if (!empty($title) && !empty($category) && !empty($target_amount)) {
-        $status = 'active'; // Default status is active
+        $status = 'active';
 
         $stmt = $pdo->prepare("INSERT INTO savings_plans (user_id, title, category, target_amount, description, deadline, status) VALUES (?, ?, ?, ?, ?, ?, ?)");
         $stmt->execute([$user_id, $title, $category, $target_amount, $description, $deadline, $status]);
 
-        // Add success message
+        
         $success_message = "Your savings plan has been created successfully! Redirecting to your savings view...";
 
-        // Redirect to the view savings page after a short delay to show the message
+    
         header("refresh:2;url=view_savings.php");
         exit();
     } else {
-        // Error if mandatory fields are missing
+        
         $error_message = "Please fill in all required fields (Title, Category, Target Amount).";
     }
 }
@@ -85,7 +85,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <label for="description">Description (Optional):</label>
             <textarea name="description" id="description"></textarea>
 
-            <!-- Add the input field for the deadline -->
+            
             <label for="deadline">Deadline (yyyy-mm-dd):</label>
             <input type="date" name="deadline" id="deadline" required>
 

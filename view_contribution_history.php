@@ -1,24 +1,24 @@
 <?php
-// Include the database connection file
-include('db.php'); // Use your existing db.php for the database connection
 
-// Start the session
+include('db.php'); 
+
+
 session_start();
 
-// Check if user is logged in
+
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit;
 }
 
-$user_id = $_SESSION['user_id']; // Get the user ID from the session
+$user_id = $_SESSION['user_id']; 
 
-// Fetch all Money Duo groups the user is part of
+
 $stmt = $pdo->prepare("SELECT * FROM money_duo WHERE user1_id = ? OR user2_id = ?");
 $stmt->execute([$user_id, $user_id]);
 $money_duos = $stmt->fetchAll();
 
-// Fetch contributions for each Money Duo
+
 $contribution_histories = [];
 foreach ($money_duos as $duo) {
     $stmt = $pdo->prepare("SELECT ch.amount, ch.contribution_date, u.email AS contributor_email 

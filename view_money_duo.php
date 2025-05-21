@@ -10,9 +10,9 @@ if (!isset($_SESSION["user_id"])) {
 $user_id = $_SESSION["user_id"];
 $message = "";
 
-// Handle POST requests
+
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    // Contribution
+    
     if (isset($_POST["contribute_amount"], $_POST["money_duo_id"])) {
         $contribute_amount = floatval($_POST["contribute_amount"]);
         $money_duo_id = intval($_POST["money_duo_id"]);
@@ -30,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 $stmt = $pdo->prepare("INSERT INTO contribution_history (money_duo_id, user_id, amount) VALUES (?, ?, ?)");
                 $stmt->execute([$money_duo_id, $user_id, $contribute_amount]);
 
-                // Get both emails
+            
                 $stmt = $pdo->prepare("SELECT email FROM users WHERE id = ?");
                 $stmt->execute([$user_id]);
                 $user_email = $stmt->fetchColumn();
@@ -43,7 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 $stmt->execute([$partner_id]);
                 $partner_email = $stmt->fetchColumn();
 
-                // Notify both users
+                
                 $subject = "New Contribution to Your Money Duo";
                 $message_body = "User $user_id has contributed $$contribute_amount to the Money Duo!";
                 $headers = "From: no-reply@savewise.com\r\n";
@@ -59,11 +59,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
     }
 
-    // Delete Duo
+    
     if (isset($_POST["delete_money_duo_id"])) {
         $money_duo_id = intval($_POST["delete_money_duo_id"]);
 
-        // Delete related data
+        
         $stmt = $pdo->prepare("DELETE FROM contribution_history WHERE money_duo_id = ?");
         $stmt->execute([$money_duo_id]);
 
@@ -76,7 +76,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $message = "Money Duo deleted successfully.";
     }
 
-    // Invite user
+    
     if (isset($_POST["invite_user"])) {
         $invite_email = trim($_POST["invite_email"]);
         $shared_goal = trim($_POST["shared_goal"]);
@@ -117,7 +117,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
     }
 
-    // Accept/Decline Invitation
+    
     if (isset($_POST["accept_invitation"], $_POST["money_duo_id"])) {
         $money_duo_id = intval($_POST["money_duo_id"]);
         $action = $_POST["accept_invitation"];
@@ -144,7 +144,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
     }
 
-    // Lock/Unlock
+    
     if (isset($_POST["lock_action"], $_POST["money_duo_id"])) {
         $money_duo_id = intval($_POST["money_duo_id"]);
         $action = $_POST["lock_action"];
@@ -157,12 +157,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 }
 
-// Fetch active duos
+
 $stmt = $pdo->prepare("SELECT * FROM money_duo WHERE user1_id = ? OR user2_id = ?");
 $stmt->execute([$user_id, $user_id]);
 $money_duos = $stmt->fetchAll();
 
-// Pending invites
+
 $stmt = $pdo->prepare("SELECT md.shared_goal, mdi.money_duo_id FROM money_duo_invitations mdi 
                        JOIN money_duo md ON md.id = mdi.money_duo_id
                        WHERE mdi.invited_user_id = ? AND mdi.status = 'pending'");

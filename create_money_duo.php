@@ -10,7 +10,7 @@ if (!isset($_SESSION["user_id"])) {
 $user_id = $_SESSION["user_id"];
 $message = "";
 
-// Send invitation logic
+
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["invite_user"])) {
     $invite_email = trim($_POST["invite_email"]);
     $shared_goal = trim($_POST["shared_goal"]);
@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["invite_user"])) {
         $message = "Invalid email address.";
     } else {
         try {
-            // Check if invited user exists
+            
             $stmt = $pdo->prepare("SELECT id FROM users WHERE email = ?");
             $stmt->execute([$invite_email]);
             $user2 = $stmt->fetch();
@@ -30,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["invite_user"])) {
             } elseif ($user2["id"] == $user_id) {
                 $message = "You cannot invite yourself.";
             } else {
-                // Check for existing Money Duo
+                
                 $stmt = $pdo->prepare("SELECT * FROM money_duo WHERE 
                     (user1_id = ? AND user2_id = ?) OR (user1_id = ? AND user2_id = ?)");
                 $stmt->execute([$user_id, $user2["id"], $user2["id"], $user_id]);
@@ -39,12 +39,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["invite_user"])) {
                 if ($existing) {
                     $message = "You already have a Money Duo with this user.";
                 } else {
-                    // Create new Money Duo
+                    
                     $stmt = $pdo->prepare("INSERT INTO money_duo (user1_id, user2_id, shared_goal, target_amount, saved_amount, locked, created_at) 
                                            VALUES (?, ?, ?, ?, 0, 0, NOW())");
                     $stmt->execute([$user_id, $user2["id"], $shared_goal, $target_amount]);
 
-                    // Send invitation email
+                    
                     $subject = "Invitation to join a Money Duo";
                     $body = "You have been invited by user $user_id to join a Money Duo with the goal of $shared_goal and a target amount of $$target_amount.";
                     $headers = "From: no-reply@savewise.com\r\n";

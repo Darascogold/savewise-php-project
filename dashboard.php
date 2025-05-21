@@ -124,7 +124,7 @@ $received_invitations = $stmt->fetchAll();
         <?php endif; ?>
     </section>
 
-    <!-- Invitations Sent -->
+    
     <section>
         <h3>Invitations You Sent</h3>
         <?php if ($sent_invitations): ?>
@@ -142,7 +142,7 @@ $received_invitations = $stmt->fetchAll();
         <?php endif; ?>
     </section>
 
-    <!-- Invitations Received -->
+    
     <section>
         <h3>Invitations You Received</h3>
         <?php if ($received_invitations): ?>
@@ -160,7 +160,7 @@ $received_invitations = $stmt->fetchAll();
         <?php endif; ?>
     </section>
 
-    <!-- Action Buttons -->
+    
     <div style="margin-top: 30px;">
         <a href="savings.html" class="button-link">Create Savings Plan</a>
         <a href="money_duo.html" class="button-link">Start a Money Duo</a>

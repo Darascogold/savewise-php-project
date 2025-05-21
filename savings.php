@@ -9,24 +9,24 @@ if (!isset($_SESSION["user_id"])) {
 
 $user_id = $_SESSION["user_id"];
 
-// Handle form submission
+
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    // Get user input from form
+    
     $title = $_POST["title"];
     $category = $_POST["category"];
     $target_amount = $_POST["target_amount"];
     $description = $_POST["description"];
 
-    // Insert new savings plan into the database
+    
     $stmt = $pdo->prepare("INSERT INTO savings_plans (user_id, title, category, target_amount, description) VALUES (?, ?, ?, ?, ?)");
     $stmt->execute([$user_id, $title, $category, $target_amount, $description]);
 
-    // Redirect to the dashboard or savings view page
+
     header("Location: view_savings.php");
     exit();
 }
 
-// Fetch all savings plans for the user
+
 $stmt = $pdo->prepare("SELECT * FROM savings_plans WHERE user_id = ?");
 $stmt->execute([$user_id]);
 $plans = $stmt->fetchAll();
@@ -82,7 +82,7 @@ $plans = $stmt->fetchAll();
                         Description: <?php echo htmlspecialchars($plan['description']); ?><br>
                         Status: <?php echo htmlspecialchars($plan['status']); ?><br>
 
-                        <!-- Actions -->
+                        
                         <?php if ($plan['status'] !== 'locked'): ?>
                             <a href="view_savings.php?action=lock&plan_id=<?php echo $plan['id']; ?>">Lock</a> |
                         <?php endif; ?>

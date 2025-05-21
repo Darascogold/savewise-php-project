@@ -12,7 +12,7 @@ if (!isset($_SESSION["user_id"])) {
 
 $user_id = $_SESSION["user_id"];
 
-// Validate required POST data
+
 if (!isset($_POST["duo_id"], $_POST["action"])) {
     http_response_code(400);
     echo json_encode(["status" => "error", "message" => "Missing required parameters."]);
@@ -30,12 +30,12 @@ if ($duo_id === false || !in_array($action, ['lock', 'unlock'], true)) {
 
 $lock_value = ($action === 'lock') ? 1 : 0;
 
-// Ensure the user is part of the duo before updating
+
 $stmt = $pdo->prepare("UPDATE money_duo SET locked = ? WHERE id = ? AND (user1_id = ? OR user2_id = ?)");
 $stmt->execute([$lock_value, $duo_id, $user_id, $user_id]);
 
 if ($stmt->rowCount() > 0) {
-    // Optional logging (uncomment if needed)
+    
     // file_put_contents("duo_lock_log.txt", date("Y-m-d H:i:s") . " | User $user_id set duo $duo_id to " . ($lock_value ? "LOCKED" : "UNLOCKED") . "\n", FILE_APPEND);
 
     echo json_encode([
