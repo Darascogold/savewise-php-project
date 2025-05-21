@@ -1,0 +1,293 @@
+/* Import Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* Base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f9f9fb;
+    color: #2d2d2d;
+    line-height: 1.6;
+}
+
+/* Header */
+header {
+    background: linear-gradient(135deg, #2a2a72, #009ffd);
+    color: #fff;
+    padding: 40px 0 20px;
+    text-align: center;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+    font-size: 42px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+/* Navigation */
+nav ul {
+    list-style: none;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: #fff;
+    font-weight: 500;
+    text-decoration: none;
+    font-size: 18px;
+    padding-bottom: 4px;
+    border-bottom: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: #ffcc00;
+    border-color: #ffcc00;
+}
+
+/* Navbar (dashboard) */
+.navbar {
+    background-color: #1c1c4e;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    flex-wrap: wrap;
+}
+
+.navbar h1 {
+    color: #fff;
+    font-size: 28px;
+}
+
+.navbar a {
+    color: #fff;
+    margin-left: 25px;
+    font-size: 16px;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.navbar a:hover {
+    color: #ffcc00;
+}
+
+/* Dashboard Tabs */
+.dashboard-tabs {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 16px;
+    background: #ffffff;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+
+.dashboard-tabs a {
+    padding: 10px 22px;
+    background: #f1f3f6;
+    color: #1c1c4e;
+    font-weight: 500;
+    border-radius: 50px;
+    border: 2px solid transparent;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.dashboard-tabs a:hover {
+    background: #1c1c4e;
+    color: #fff;
+    border-color: #1c1c4e;
+}
+
+/* Main Content */
+main {
+    max-width: 1000px;
+    margin: 40px auto;
+    background: #fff;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease;
+}
+
+main:hover {
+    transform: scale(1.01);
+}
+
+/* Cards */
+.card {
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 24px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
+}
+
+/* Progress Bar */
+.money-duo-progress {
+    background-color: #e3e3e3;
+    border-radius: 30px;
+    height: 24px;
+    margin-top: 10px;
+    overflow: hidden;
+    position: relative;
+}
+
+.money-duo-progress-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(to right, #28c76f, #00cfe8);
+    transition: width 0.4s ease;
+    border-radius: 30px 0 0 30px;
+}
+
+.money-duo-progress-label {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    font-size: 14px;
+    line-height: 24px;
+    color: #fff;
+    font-weight: bold;
+}
+
+/* Lock Button */
+.lock-btn {
+    background-color: #ff6b6b;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.lock-btn:hover {
+    background-color: #ff4d4d;
+}
+
+/* History Log */
+.money-duo-history {
+    background-color: #f8f9fb;
+    border-left: 4px solid #009ffd;
+    padding: 18px;
+    border-radius: 10px;
+    margin-top: 20px;
+    font-size: 15px;
+    color: #555;
+}
+
+/* Form */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+form label {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+form input, form select {
+    padding: 14px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 2px solid #ddd;
+    transition: border 0.3s, box-shadow 0.3s;
+}
+
+form input:focus, form select:focus {
+    border-color: #009ffd;
+    box-shadow: 0 0 0 4px rgba(0,159,253,0.1);
+    outline: none;
+}
+
+form button {
+    background-color: #009ffd;
+    color: white;
+    padding: 14px;
+    font-size: 17px;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+}
+
+form button:hover {
+    background-color: #007acc;
+    transform: translateY(-2px);
+}
+
+form button:active {
+    transform: translateY(0);
+}
+
+/* Message Boxes */
+.error {
+    background: #ffecec;
+    color: #d8000c;
+    padding: 12px;
+    border-left: 6px solid #d8000c;
+    border-radius: 8px;
+}
+
+.success {
+    background: #e6ffed;
+    color: #2e7d32;
+    padding: 12px;
+    border-left: 6px solid #2e7d32;
+    border-radius: 8px;
+}
+
+/* Footer */
+footer {
+    background: #1c1c1c;
+    color: white;
+    text-align: center;
+    padding: 16px 0;
+    font-size: 14px;
+    margin-top: 60px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 30px;
+    }
+
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .navbar a {
+        margin: 8px 0 0;
+    }
+
+    main {
+        padding: 25px;
+        margin: 30px 16px;
+    }
+
+    .dashboard-tabs a {
+        width: 100%;
+        text-align: center;
+    }
+}

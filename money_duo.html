@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Money Duo - SaveWise</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Create a Money Duo</h1>
+        <nav>
+            <ul>
+                <li><a href="dashboard.php">Dashboard</a></li>
+                <li><a href="view_savings.php">View Savings</a></li>
+                <li><a href="view_money_duo.php">Money Duo</a></li>
+                <li><a href="logout.php">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Start a New Money Duo</h2>
+        
+        <p><em>All fields are required. Make sure your partner is registered on SaveWise.</em></p>
+
+        <form action="create_money_duo.php" method="post" class="duo-form">
+            <label for="shared_goal">Shared Savings Goal:</label>
+            <input type="text" name="shared_goal" id="shared_goal" placeholder="e.g., Food, Tuition" required class="input-field">
+
+            <label for="partner_email">Partner's Email:</label>
+            <input type="email" name="partner_email" id="partner_email" placeholder="e.g., partner@example.com" required class="input-field" pattern="[^@\s]+@[^@\s]+\.[^@\s]+">
+
+            <label for="target_amount">Target Amount ($):</label>
+            <input type="number" name="target_amount" id="target_amount" placeholder="e.g., 500" min="1" required class="input-field">
+
+            <button type="submit" class="btn-primary">Create Money Duo</button>
+        </form>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 SaveWise. All rights reserved.</p>
+    </footer>
+</body>
+</html>
